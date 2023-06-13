@@ -31,6 +31,9 @@ class Record(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 
+	class Meta:
+		ordering = ['created_at']
+
 class RecordLog(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	description = models.CharField(max_length=255, default="")
@@ -39,3 +42,5 @@ class RecordLog(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 
+	class Meta:
+		ordering = ['created_at']
