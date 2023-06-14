@@ -5,12 +5,13 @@ from rest_framework import serializers
 class UserSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = User
-		fields = ['url', 'username', 'email', 'groups']
+		fields = ['url', 'id', 'username', 'email']
 
 class PetSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Pet
-		fields = ['owner', 'animal', 'name', 'description']
+		fields = ['owner', 'id', 'animal', 'name', 'description']
+		read_only_fields = ['owner']
 
 class RecordSerializer(serializers.ModelSerializer):
 	class Meta:

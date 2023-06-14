@@ -17,15 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from pets.views import UserViewSet, PetViewSet, RecordViewSet
-
-router = routers.DefaultRouter()
-router.register(r'users', UserViewSet, basename="user")
-router.register(r'pets', PetViewSet, basename="pet")
-router.register(r'records', RecordViewSet, basename="record")
+from rest_framework.urlpatterns import format_suffix_patterns
+from pets import views
 
 urlpatterns = [
-	path('', include(router.urls)),
     path('admin/', admin.site.urls, name="admin"),
-	path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+	path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+	path('users/', views.UserList.as_view(), name='user-list'),
+	path('users/<int:pk>', views.UserDetail.as_view(), name='user-detail'),
+	path('pets/', views.PetList.as_view(), name='pet-list'),
+	path('pets/<int:pk>', views.PetDetail.as_view(), name='pet-detail'),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
