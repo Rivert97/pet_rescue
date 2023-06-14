@@ -21,12 +21,15 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from pets import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls, name="admin"),
 	path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('admin/', admin.site.urls, name="admin"),
 	path('users/', views.UserList.as_view(), name='user-list'),
 	path('users/<int:pk>', views.UserDetail.as_view(), name='user-detail'),
 	path('pets/', views.PetList.as_view(), name='pet-list'),
 	path('pets/<int:pk>', views.PetDetail.as_view(), name='pet-detail'),
+	path('records/', views.RecordList.as_view(), name='record-list'),
+	path('records/<int:pk>', views.RecordDetail.as_view(), name='record-detail'),
+	path('records/<int:record_pk>/logs/', views.RecordLogList.as_view(), name='record-list'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

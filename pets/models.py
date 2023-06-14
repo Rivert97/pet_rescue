@@ -34,8 +34,12 @@ class Record(models.Model):
 
 	class Meta:
 		ordering = ['created_at']
+	
+	def __str__(self):
+		return str(self.id)
 
 class RecordLog(models.Model):
+	record = models.ForeignKey(Record, on_delete=models.CASCADE)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	description = models.CharField(max_length=255, default="")
 	seen_location = models.CharField(max_length=255, default="", blank=True)
