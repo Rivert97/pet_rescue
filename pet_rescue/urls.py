@@ -16,23 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import routers
-from rest_framework.urlpatterns import format_suffix_patterns
-from knox import views as knox_views
-from pets import views
 
 urlpatterns = [
     path('admin/', admin.site.urls, name="admin"),
-	path('users/', views.UserList.as_view(), name='user-list'),
-	path('users/<int:pk>', views.UserDetail.as_view(), name='user-detail'),
-	path('pets/', views.PetList.as_view(), name='pet-list'),
-	path('pets/<int:pk>', views.PetDetail.as_view(), name='pet-detail'),
-	path('records/', views.RecordList.as_view(), name='record-list'),
-	path('records/<int:pk>', views.RecordDetail.as_view(), name='record-detail'),
-	path('records/<int:record_pk>/logs/', views.RecordLogList.as_view(), name='record-list'),
-	path('auth/login/', views.LoginView.as_view(), name='knox-login'),
-	path('auth/logout/', knox_views.LogoutView.as_view(), name='knox-logout'),
-	path('auth/logoutall/', knox_views.LogoutAllView.as_view(), name='knox-logoutall'),
+	path('users/', include("users.urls")),
+	path('pets/', include("pets.urls")),
 ]
 
-urlpatterns = format_suffix_patterns(urlpatterns)
