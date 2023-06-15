@@ -10,8 +10,8 @@ class PetSerializer(serializers.ModelSerializer):
 class RecordSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Record
-		fields = ['responsible', 'pet', 'description', 'lost_location', 'status']
-		read_only_fields = ['responsible']
+		fields = ['id', 'responsible', 'pet', 'description', 'lost_location', 'status']
+		read_only_fields = ['id', 'responsible']
 	
 	def validate(self, data):
 		# Validamos la mascota

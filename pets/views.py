@@ -58,7 +58,7 @@ class RecordList(generics.ListCreateAPIView):
 		if serializer.is_valid():
 			record = serializer.save(responsible=request.user)
 			# Creamos un evento
-			recordlog = RecordLog(user=request.user, description="Se abre aviso")
+			recordlog = RecordLog(record=record, user=request.user, description="Se abre aviso")
 			recordlog.save()
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
