@@ -18,10 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 from pets import views
 
 urlpatterns = [
-	path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls, name="admin"),
 	path('users/', views.UserList.as_view(), name='user-list'),
 	path('users/<int:pk>', views.UserDetail.as_view(), name='user-detail'),
@@ -30,6 +33,8 @@ urlpatterns = [
 	path('records/', views.RecordList.as_view(), name='record-list'),
 	path('records/<int:pk>', views.RecordDetail.as_view(), name='record-detail'),
 	path('records/<int:record_pk>/logs/', views.RecordLogList.as_view(), name='record-list'),
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
