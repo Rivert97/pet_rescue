@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 	'pets',
 	'rest_framework',
-    'rest_framework_simplejwt',
+	'knox',
 ]
 
 MIDDLEWARE = [
@@ -131,6 +131,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'knox.auth.TokenAuthentication',
     )
+}
+
+REST_KNOX = {
+	'TOKEN_TTL': None,
 }

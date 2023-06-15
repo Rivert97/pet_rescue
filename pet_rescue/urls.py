@@ -18,10 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from rest_framework.urlpatterns import format_suffix_patterns
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
+from knox import views as knox_views
 from pets import views
 
 urlpatterns = [
@@ -33,8 +30,9 @@ urlpatterns = [
 	path('records/', views.RecordList.as_view(), name='record-list'),
 	path('records/<int:pk>', views.RecordDetail.as_view(), name='record-detail'),
 	path('records/<int:record_pk>/logs/', views.RecordLogList.as_view(), name='record-list'),
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+	path('auth/login/', views.LoginView.as_view(), name='knox-login'),
+	path('auth/logout/', knox_views.LogoutView.as_view(), name='knox-logout'),
+	path('auth/logoutall/', knox_views.LogoutAllView.as_view(), name='knox-logoutall'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
